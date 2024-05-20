@@ -57,22 +57,22 @@ def myEdgeFilter(img0, sigma):
             # Suppress non-max pixels
             if (magn[i, j] >= a) and (magn[i, j] >= b):
                 magn_s[i, j] = magn[i, j]
-    return magn_s
+    # return magn_s
 
-    # # Hysteresis thresholding to make edges continuous
-    # t_highRatio = 0.09
-    # t_lowRatio = 0.05
+    # Hysteresis thresholding to make edges continuous
+    t_highRatio = 0.09
+    t_lowRatio = 0.05
 
-    # t_high = np.max(magn_s) * t_highRatio
-    # t_low = t_high * t_lowRatio
+    t_high = np.max(magn_s) * t_highRatio
+    t_low = t_high * t_lowRatio
 
-    # edges = np.zeros_like(magn_s)
-    # edges[magn_s >= t_high] = 255
+    edges = np.zeros_like(magn_s)
+    edges[magn_s >= t_high] = 255
 
-    # for i in range(1, N - 1):
-    #     for j in range(1, M - 1):
-    #         if (t_low <= magn_s[i, j] < t_high) and \
-    #            ((magn_s[i-1:i+2, j-1:j+2] >= t_high).any()):
-    #             edges[i, j] = 255
+    for i in range(1, N - 1):
+         for j in range(1, M - 1):
+             if (t_low <= magn_s[i, j] < t_high) and \
+                ((magn_s[i-1:i+2, j-1:j+2] >= t_high).any()):
+                 edges[i, j] = 255
 
-    # return edges
+    return edges
